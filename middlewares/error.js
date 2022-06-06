@@ -1,13 +1,4 @@
-class ErrorHander extends Error {
-  constructor(message, statusCode) {
-    super(message);
-    this.statusCode = statusCode;
-
-    Error.captureStackTrace(this, this.constructor);
-  }
-}
-
-module.exports = ErrorHander;
+const ErrorHandler = require("../utils/errorhandler");
 
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
