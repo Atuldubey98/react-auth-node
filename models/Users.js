@@ -6,7 +6,7 @@ const Users = sequelize.define("user", {
   email: { type: DataTypes.STRING, primaryKey: true },
   password: { type: DataTypes.STRING },
 });
-Users.sync({ force : true});
+Users.sync();
 Users.prototype.getJWTToken = () => {
   return jwt.sign(
     { email: this.email, name: this.name },
