@@ -22,14 +22,14 @@ const AuthenticationPage = () => {
   const onPasswordChange = (e) => {
     setPassword(e.target.value);
   };
-  
+  const redirect = window.location.search ? window.location.search.split("=")[1] : "/profile";
+  console.log(window.location);
   useEffect(() => {
     if (error) {
       console.log(error);
     }
-    console.log(isAuthenticated);
     if (isAuthenticated) {
-      navigate("/profile");
+      navigate("/");
     }
   }, [isAuthenticated, error, navigate, redirect]);
   return (

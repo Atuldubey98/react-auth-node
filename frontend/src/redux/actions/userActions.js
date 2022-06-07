@@ -13,13 +13,10 @@ import {
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_REQUEST });
-
-    const config = { headers: { "Content-Type": "application/json" } };
-
     const { data } = await instance.post(
       `api/v1/login`,
       { email, password },
-      config
+      { headers: { "Content-Type": "application/json" } }
     );
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
   } catch (error) {
