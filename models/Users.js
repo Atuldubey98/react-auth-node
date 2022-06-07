@@ -5,15 +5,18 @@ const Users = sequelize.define("user", {
   name: { type: DataTypes.STRING, allowNull: false },
   email: { type: DataTypes.STRING, primaryKey: true },
   password: { type: DataTypes.STRING },
+}, {
+  getterMethods : {
+    getJWTToken () {
+      return jwt.sign(
+        { email: this.email, user: this.name },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: process.env.JWT_EXPIRE,
+        }
+      );
+    }
+  }
 });
 Users.sync();
-Users.prototype.getJWTToken = () => {
-  return jwt.sign(
-    { email: this.email, name: this.name },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: process.env.JWT_EXPIRE,
-    }
-  );
-};
 module.exports = Users;

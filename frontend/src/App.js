@@ -1,23 +1,30 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import AuthenticationPage from "./pages/AuthenticationPage";
-import ProfilePage from "./ProfilePage/ProfilePage";
+import AuthenticationPage from "./pages/AuthenticationPage/AuthenticationPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import ProtectedRoute from "./pages/ProtectedRoute";
 import { loadUser } from "./redux/actions/userActions";
 
 function App() {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(loadUser())
-    return () => {
-    }
-  }, [dispatch])
-  
+    dispatch(loadUser());
+    return () => {};
+  }, [dispatch]);
+
   return (
     <div className="app">
       <Routes>
-        <Route path={"/login"} element={<AuthenticationPage/>}/>
-        <Route path={"/profile"} element={<ProfilePage/>}/>
+        <Route path={"/login"} element={<AuthenticationPage />} />
+        <Route
+          path={"/profile"}
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   );
