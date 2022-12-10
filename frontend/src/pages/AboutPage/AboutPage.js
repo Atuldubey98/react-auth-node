@@ -1,22 +1,23 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
-import "./HomePage.css";
-const HomePage = () => {
+import "./AboutPage.css";
+const AboutPage = () => {
   const { isAuthenticated } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const location = useLocation();
+  const pathname = location.pathname;
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate("/login?redirect=/");
+      navigate("/login?redirect=" + pathname);
     }
-  }, [navigate, isAuthenticated]);
+  }, [navigate, isAuthenticated, pathname]);
   return (
-    <div className="home__page">
+    <div className="about">
       <Header />
-      <div className="home"></div>
     </div>
   );
 };
 
-export default HomePage;
+export default AboutPage;

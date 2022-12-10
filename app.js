@@ -2,13 +2,15 @@ const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const cors = require('cors');
-app.use(cors({
-    origin : "http://localhost:3000",
-    credentials : true
-}))
+const cors = require("cors");
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 app.use(cookieParser());
-app.use(bodyParser({urlencoded :  true}));
+app.use(bodyParser());
 
 const errorMiddleware = require("./middlewares/error");
 const user = require("./routes/user");

@@ -1,4 +1,4 @@
-import instance  from "../../axios";
+import instance from "../../axios";
 import {
   CLEAR_ERRORS,
   LOAD_USER_FAIL,
@@ -33,14 +33,14 @@ export const loadUser = () => async (dispatch) => {
     dispatch({ type: LOAD_USER_FAIL, payload: error.message });
   }
 };
-export const logout = ()=>async (dispatch)=>{
+export const logout = (navigate) => async (dispatch) => {
   try {
     await instance.post("/api/v1/logout");
-    dispatch({type :  LOGOUT_SUCCESS});
+    dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {
-    dispatch({type :  LOGOUT_FAIL, payload : error.message});
+    dispatch({ type: LOGOUT_FAIL, payload: error.message });
   }
-}
+};
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
 };

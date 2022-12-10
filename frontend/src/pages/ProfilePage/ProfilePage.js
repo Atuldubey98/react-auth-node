@@ -1,18 +1,24 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { logout } from '../../redux/actions/userActions';
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import Header from "../../components/Header/Header";
 
-import './ProfilePage.css'
+import "./ProfilePage.css";
 const ProfilePage = () => {
-  const dispatch = useDispatch();
-  const onLogout = ()=>{
-    dispatch(logout());
-  }
+  const { isAuthenticated } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const pathname = location.pathname;
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login?redirect=" + pathname);
+    }
+  }, [navigate, isAuthenticated, pathname]);
   return (
-    <div>
-      <button onClick={onLogout}>Logout</button>
+    <div className="profile">
+      <Header />
     </div>
-  )
-}
+  );
+};
 
-export default ProfilePage
+export default ProfilePage;

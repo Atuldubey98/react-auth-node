@@ -1,0 +1,27 @@
+.home {
+  height: 100vh;
+}
+.home__header ul {
+  display: flex;
+  gap: 10px;
+}
+.home__header ul li {
+  list-style: none;
+}
+.home__header ul li a {
+  text-decoration: none;
+  color: black;
+}
+.home__body {
+  border: 1px solid black;
+  display: grid;
+  grid-auto-flow: row;
+  overflow-x: scroll;
+  height: 100vh;
+  display: flex;
+  width: 400%;
+}
+.home__body .home__item {
+    width: 400%;
+    height: 100vh;
+}

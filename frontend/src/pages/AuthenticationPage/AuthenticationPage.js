@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import useQuery from "../../hooks/useQuery";
 import { login } from "../../redux/actions/userActions";
 
 import "./AuthenticationPage.css";
@@ -22,14 +23,14 @@ const AuthenticationPage = () => {
   const onPasswordChange = (e) => {
     setPassword(e.target.value);
   };
-  const redirect = window.location.search ? window.location.search.split("=")[1] : "/profile";
-  console.log(window.location);
+  const query = useQuery();
+  const redirect = query.has("redirect") ? query.get("redirect") : "/";
   useEffect(() => {
     if (error) {
       console.log(error);
     }
     if (isAuthenticated) {
-      navigate("/");
+      navigate(redirect);
     }
   }, [isAuthenticated, error, navigate, redirect]);
   return (
@@ -48,6 +49,7 @@ const AuthenticationPage = () => {
             />
             <button type="submit">Login</button>
           </form>
+          {error && <div className="login__error">{error}</div>}
         </div>
       )}
     </div>
